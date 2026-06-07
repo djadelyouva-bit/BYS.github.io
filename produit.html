@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Détail produit</title>
+  <link rel="icon" type="image/x-icon" href="images\logo.png">
+  <style>
+    /* Réutilisez les styles de base + spécifiques produit */
+    body { font-family: Arial; background: #f0f0f0; padding: 20px; }
+    .product-container { display: flex; gap: 30px; max-width: 1200px; margin: 0 auto; background: white; border-radius: 20px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+    .product-images { flex: 1; position: relative; }
+    .product-images img { width: 100%; border-radius: 10px; }
+    .product-details { flex: 1; }
+    .thumbnails { display: flex; gap: 10px; margin-top: 10px; }
+    .thumbnails img { width: 80px; cursor: pointer; border-radius: 5px; }
+    button { background: gray; border: none; border-radius: 20px; padding: 10px 20px; font-weight: bold; color: blue; cursor: pointer; margin-top: 20px; }
+    .panier { margin-top: 40px; background: white; border-radius: 20px; padding: 20px; max-width: 800px; margin: 40px auto; }
+    #precedent, #suivant { background: rgba(0,0,0,0.5); color: white; border: none; font-size: 24px; padding: 5px 12px; border-radius: 50%; position: absolute; top: 50%; transform: translateY(-50%); cursor: pointer; }
+    #precedent { left: 10px; }
+    #suivant { right: 10px; }
+  </style>
+</head>
+<body>
+  <div class="product-container" id="productContainer">
+    <!-- injecté par JS -->
+  </div>
+
+  <div class="panier">
+    <h2>🛒 Votre Panier</h2>
+    <ul id="liste-panier"><li>Chargement...</li></ul>
+    <div class="total">Total : <span id="total-panier">0.00</span> €</div>
+    <button class="vider-panier" onclick="viderPanier()">Vider le panier</button>
+  </div>
+
+  <script src="panier-commun.js"></script>
+  <script>
+    // Base de données produits (vous pouvez l'externaliser dans produits_data.js)
+    const produitsDB = {
+      "asus-rog-strix-xg27aqdmes": {
+        nom: "ASUS ROG Strix OLED XG27AQDMES",
+        prix: 799,
+        images: ["afficheur/1/1 (1).jpg", "afficheur/1/1 (2).jpg"],
+        specs: ["27\" QD-OLED", "240 Hz", "0.03 ms", "G-Sync compatible"]
+      },
+      "iyama-g2245hsu-b2": {
+        nom: "IYAMA G2245HSU-B2",
+        prix: 149,
+        images: ["afficheur/3/1 (1).webp"],
+        specs: ["22\" FHD", "100 Hz", "IPS", "1 ms"]
+      },
+      // Ajoutez ici tous vos autres produits (claviers, PC, etc.)
+      "clavier-filaire-magnetique-mo": {
+        nom: "Clavier Gamer Filaire Magnétique Mo",
+        prix: 89.99,
+        images: ["clavier/1/1 (1).webp"],
+        specs: ["Switchs magnétiques", "RGB", "Anti-ghosting"]
+      }
+      // ... complétez selon vos IDs
+    };
+
+    function getProduitId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('id');
+    }
+
+    function afficherProduit() {
+      const id = getProduitId();
+      const produit = produitsDB[id];
+      if (!produit) {
+        document.getElementById('productContainer').innerHTML = '<p>Produit non trouvé</p>';
+        return;
+      }
+      let imageHtml = `<div class="product-images">
+          <button id="precedent">❮</button>
+          <img id="mainImage" src="${produit.images[0]}" alt="${produit.nom}">
+          <button id="suivant">❯</button>
+          <div class="thumbnails">`;
+      produit.images.forEach((img, idx) => {
+        imageHtml += `<img src="${img}" onclick="document.getElementById('mainImage').src='${img}'">`;
+      });
+      imageHtml += `</div></div>`;
+
+      let specsHtml = `<div class="product-details">
+          <h1>${produit.nom}</h1>
+          <p class="price">${produit.prix} €</p>
+          <ul>${produit.specs.map(s => `<li>${s}</li>`).join('')}</ul>
+          <button onclick="ajouterAuPanier('${produit.nom}', ${produit.prix}, '${produit.images[0]}')">Ajouter au panier</button>
+        </div>`;
+      document.getElementById('productContainer').innerHTML = imageHtml + specsHtml;
+
+      // Gestion du carrousel simple
+      let currentIndex = 0;
+      document.getElementById('precedent')?.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + produit.images.length) % produit.images.length;
+        document.getElementById('mainImage').src = produit.images[currentIndex];
+      });
+      document.getElementById('suivant')?.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % produit.images.length;
+        document.getElementById('mainImage').src = produit.images[currentIndex];
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      afficherProduit();
+      if (typeof afficherPanier === 'function') afficherPanier();
+    });
+  </script>
+</body>
+</html>

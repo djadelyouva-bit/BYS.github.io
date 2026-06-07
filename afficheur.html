@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Catalogue Écrans</title>
+  <link rel="icon" type="image/x-icon" href="images\logo.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-image: url('hii.jpg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 4px black;
+      margin-bottom: 30px;
+    }
+    .catalogue {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .pc-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid black;
+      border-radius: 20px;
+      padding: 15px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .pc-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .pc-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;  /* bonne dimension, pas de déformation */
+      background: #f0f0f0;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .pc-card h3 {
+      font-size: 18px;
+      margin: 10px 0;
+      text-align: center;
+    }
+    .pc-card p {
+      font-size: 14px;
+      margin: 5px 0;
+    }
+    .price {
+      font-weight: bold;
+      color: #d32f2f;
+      font-size: 18px;
+      text-align: center;
+      margin: 10px 0;
+    }
+    button {
+      background: gray;
+      border: 1px solid black;
+      border-radius: 20px;
+      padding: 10px;
+      font-weight: bold;
+      color: blue;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #45a049;
+      color: white;
+    }
+    /* Panier latéral (optionnel) – vous pouvez garder votre affichage en bas */
+    .panier {
+      margin-top: 40px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .panier h2 { margin-bottom: 15px; }
+    .panier ul { list-style: none; }
+    .panier li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+      border-bottom: 1px solid #ccc;
+    }
+    .total {
+      text-align: right;
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-top: 15px;
+    }
+    .vider-panier {
+      background: #f44336;
+      color: white;
+      border: none;
+      margin-top: 10px;
+    }
+    @media (max-width: 900px) {
+      .catalogue { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .catalogue { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🖥️ Catalogue des Écrans</h1>
+  <div class="catalogue">
+    <!-- Produit 1 -->
+    <div class="pc-card" onclick="window.location.href='produit.html?id=asus-rog-strix-xg27aqdmes'">
+      <img src="afficheur/1/1 (1).jpg" alt="ASUS ROG Strix OLED">
+      <h3>ASUS ROG Strix OLED XG27AQDMES</h3>
+      <p>27" QD-OLED | 240 Hz | 0.03 ms | G-Sync</p>
+      <p class="price">799 €</p>
+      <button onclick="event.stopPropagation(); ajouterAuPanier('ASUS ROG Strix OLED XG27AQDMES', 799, 'afficheur/1/1 (1).jpg')">Ajouter au panier</button>
+    </div>
+    <!-- Produit 2 -->
+    <div class="pc-card" onclick="window.location.href='produit.html?id=iyama-g2245hsu-b2'">
+      <img src="afficheur/3/1 (1).webp" alt="IYAMA">
+      <h3>IYAMA G2245HSU-B2</h3>
+      <p>22" FHD | 100 Hz | IPS | 1 ms</p>
+      <p class="price">149 €</p>
+      <button onclick="event.stopPropagation(); ajouterAuPanier('IYAMA G2245HSU-B2', 149, 'afficheur/3/1 (1).webp')">Ajouter au panier</button>
+    </div>
+    <!-- Produit 3 -->
+    <div class="pc-card" onclick="window.location.href='produit.html?id=minifire-mf24c1'">
+      <img src="afficheur/8/1 (1).webp" alt="Minifire">
+      <h3>Minifire MF24C1</h3>
+      <p>24" FHD incurvé | 100 Hz | USB-C | HP</p>
+      <p class="price">129 €</p>
+      <button onclick="event.stopPropagation(); ajouterAuPanier('Minifire MF24C1', 129, 'afficheur/8/1 (1).webp')">Ajouter au panier</button>
+    </div>
+    <!-- Produit 4 -->
+    <div class="pc-card" onclick="window.location.href='produit.html?id=viewsonic-vx3218-pc-mhd'">
+      <img src="afficheur/9/1 (1).webp" alt="Viewsonic">
+      <h3>VIEWSONIC VX3218-PC-MHD</h3>
+      <p>32" FHD incurvé | 180 Hz | VA | 1 ms</p>
+      <p class="price">229 €</p>
+      <button onclick="event.stopPropagation(); ajouterAuPanier('VIEWSONIC VX3218-PC-MHD', 229, 'afficheur/9/1 (1).webp')">Ajouter au panier</button>
+    </div>
+    <!-- Produit 5 -->
+    <div class="pc-card" onclick="window.location.href='produit.html?id=z-edge-32-240hz'">
+      <img src="afficheur/10/1 (1).webp" alt="Z-Edge 32">
+      <h3>Z-Edge 32 pouces 240Hz</h3>
+      <p>32" FHD incurvé | 240 Hz | 1500R | FreeSync</p>
+      <p class="price">279 €</p>
+      <button onclick="event.stopPropagation(); ajouterAuPanier('Z-Edge 32 pouces 240Hz', 279, 'afficheur/10/1 (1).webp')">Ajouter au panier</button>
+    </div>
+    <!-- Produit 6 -->
+    <div class="pc-card" onclick="window.location.href='produit.html?id=z-edge-ug24pj-blanc'">
+      <img src="afficheur/7/1 (1).webp" alt="Z-Edge UG24PJ">
+      <h3>Z-Edge UG24PJ Blanc</h3>
+      <p>24" FHD | 240 Hz | IPS | 1 ms | HDR</p>
+      <p class="price">199 €</p>
+      <button onclick="event.stopPropagation(); ajouterAuPanier('Z-Edge UG24PJ Blanc', 199, 'afficheur/7/1 (1).webp')">Ajouter au panier</button>
+    </div>
+    <!-- Produit 7 -->
+    <div class="pc-card" onclick="window.location.href='produit.html?id=z-edge-ug27f-incuve'">
+      <img src="afficheur/5/1 (1).webp" alt="Z-Edge UG27F">
+      <h3>Z-Edge UG27F Incurvé</h3>
+      <p>27" FHD incurvé | 180 Hz | 1500R | FreeSync</p>
+      <p class="price">189 €</p>
+      <button onclick="event.stopPropagation(); ajouterAuPanier('Z-Edge UG27F Incurvé', 189, 'afficheur/5/1 (1).webp')">Ajouter au panier</button>
+    </div>
+    <!-- Produit 8 -->
+    <div class="pc-card" onclick="window.location.href='produit.html?id=z-edge-ug27p-280hz'">
+      <img src="afficheur/2/1 (1).webp" alt="Z-EDGE UG27P">
+      <h3>Z-EDGE UG27P Incurvé 280Hz</h3>
+      <p>27" FHD incurvé | 280 Hz | 1 ms | FreeSync</p>
+      <p class="price">229 €</p>
+      <button onclick="event.stopPropagation(); ajouterAuPanier('Z-EDGE UG27P Incurvé 280Hz', 229, 'afficheur/2/1 (1).webp')">Ajouter au panier</button>
+    </div>
+    <!-- Produit 9 -->
+    <div class="pc-card" onclick="window.location.href='produit.html?id=z-edge-ug27pj-noir'">
+      <img src="afficheur/4/1 (1).webp" alt="Z-EDGE UG27PJ Noir">
+      <h3>Z-EDGE UG27PJ Noir</h3>
+      <p>27" FHD | 240 Hz | IPS | 400 cd/m²</p>
+      <p class="price">209 €</p>
+      <button onclick="event.stopPropagation(); ajouterAuPanier('Z-EDGE UG27PJ Noir', 209, 'afficheur/4/1 (1).webp')">Ajouter au panier</button>
+    </div>
+    <!-- Produit 10 -->
+    <div class="pc-card" onclick="window.location.href='produit.html?id=z-edge-ug27s-300hz'">
+      <img src="afficheur/6/1 (1).webp" alt="Z-EDGE UG27S">
+      <h3>Z-EDGE UG27S Incurvé 300Hz</h3>
+      <p>27" FHD incurvé | 300 Hz | 1 ms | FreeSync</p>
+      <p class="price">259 €</p>
+      <button onclick="event.stopPropagation(); ajouterAuPanier('Z-EDGE UG27S Incurvé 300Hz', 259, 'afficheur/6/1 (1).webp')">Ajouter au panier</button>
+    </div>
+  </div>
+
+  <!-- Section panier (identique pour toutes les pages) -->
+  <div class="panier">
+    <h2>🛒 Votre Panier</h2><a href="produit.html"><button>click here</button></a>
+    <ul id="liste-panier"><li>Vide</li></ul>
+    <div class="total">Total : <span id="total-panier">0.00</span> €</div>
+    <button class="vider-panier" onclick="viderPanier()">Vider le panier</button>
+  </div>
+
+  <script src="panier-commun.js"></script>
+  <script>
+    // Initialiser l'affichage du panier au chargement
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof afficherPanier === 'function') afficherPanier();
+    });
+  </script>
+</body>
+</html>

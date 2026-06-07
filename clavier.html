@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="images\logo.png">
+  <title>Catalogue Claviers</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-image: url('hii.jpg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 4px black;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+    }
+    .catalogue {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .pc-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid black;
+      border-radius: 20px;
+      padding: 15px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .pc-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .pc-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      background: #f0f0f0;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .pc-card h3 {
+      font-size: 1rem;
+      margin: 10px 0;
+      text-align: center;
+      color: #333;
+    }
+    .pc-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 10px 0;
+    }
+    .pc-card ul li {
+      font-size: 0.8rem;
+      margin: 5px 0;
+      color: #555;
+    }
+    .price {
+      font-weight: bold;
+      color: #d32f2f;
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 10px 0;
+    }
+    button {
+      background: gray;
+      border: 1px solid black;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-weight: bold;
+      color: blue;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.2s;
+      width: fit-content;
+      align-self: center;
+    }
+    button:hover {
+      background: #45a049;
+      color: white;
+    }
+    /* Panier */
+    .panier {
+      margin-top: 40px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .panier h2 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+    .panier ul {
+      list-style: none;
+    }
+    .panier li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+      border-bottom: 1px solid #ccc;
+      align-items: center;
+    }
+    .total {
+      text-align: right;
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-top: 15px;
+      color: #d32f2f;
+    }
+    .vider-panier {
+      background: #f44336;
+      color: white;
+      border: none;
+      margin-top: 10px;
+    }
+    @media (max-width: 900px) {
+      .catalogue { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .catalogue { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>🎮 Catalogue des Claviers Gamer 🎮</h1>
+
+<div class="catalogue">
+  <!-- Clavier 1 -->
+  <div class="pc-card" onclick="window.location.href='produit.html?id=clavier-filaire-magnetique-mo'">
+    <img src="clavier/1/1 (1).webp" alt="Clavier Gamer Filaire Magnétique Mo">
+    <h3>Clavier Gamer Filaire Magnétique Mo</h3>
+    <ul>
+      <li>🔴 Switchs magnétiques</li>
+      <li>⚡ Anti-ghosting</li>
+      <li>💡 RGB personnalisable</li>
+      <li>🔌 Filaire USB</li>
+    </ul>
+    <p class="price">89,99 €</p>
+    <button onclick="event.stopPropagation(); ajouterAuPanier('Clavier Gamer Filaire Magnétique Mo', 89.99, 'clavier/1/1 (1).webp')">Ajouter au panier</button>
+  </div>
+
+  <!-- Clavier 2 -->
+  <div class="pc-card" onclick="window.location.href='produit.html?id=rk-royal-kludge-s98'">
+    <img src="clavier/1 (2)/1 (1).webp" alt="RK ROYAL KLUDGE S98">
+    <h3>RK ROYAL KLUDGE S98</h3>
+    <ul>
+      <li>🔴 Format 98%</li>
+      <li>🎨 RGB dynamique</li>
+      <li>🔌 Bluetooth/2.4GHz/Filaire</li>
+      <li>⚡ Batterie 4000mAh</li>
+    </ul>
+    <p class="price">129,99 €</p>
+    <button onclick="event.stopPropagation(); ajouterAuPanier('RK ROYAL KLUDGE S98', 129.99, 'clavier/1 (2)/1 (1).webp')">Ajouter au panier</button>
+  </div>
+
+  <!-- Clavier 3 -->
+  <div class="pc-card" onclick="window.location.href='produit.html?id=spirit-pro-k5-black'">
+    <img src="clavier/1 (3)/1 (1).webp" alt="SPIRIT OF GAMER Pro-K5 black">
+    <h3>SPIRIT OF GAMER - Pro-K5 black</h3>
+    <ul>
+      <li>⚫ Design noir élégant</li>
+      <li>🎮 Switchs mécaniques</li>
+      <li>💡 Éclairage LED</li>
+      <li>🔌 Anti-ghosting</li>
+    </ul>
+    <p class="price">59,99 €</p>
+    <button onclick="event.stopPropagation(); ajouterAuPanier('SPIRIT OF GAMER - Pro-K5 black', 59.99, 'clavier/1 (3)/1 (1).webp')">Ajouter au panier</button>
+  </div>
+
+  <!-- Clavier 4 -->
+  <div class="pc-card" onclick="window.location.href='produit.html?id=spirit-pro-k5-white'">
+    <img src="clavier/1 (4)/1 (1).webp" alt="SPIRIT OF GAMER Pro-K5 white">
+    <h3>SPIRIT OF GAMER - Pro-K5 white</h3>
+    <ul>
+      <li>⚪ Design blanc élégant</li>
+      <li>🎮 Switchs mécaniques</li>
+      <li>💡 Éclairage LED</li>
+      <li>🔌 Anti-ghosting</li>
+    </ul>
+    <p class="price">59,99 €</p>
+    <button onclick="event.stopPropagation(); ajouterAuPanier('SPIRIT OF GAMER - Pro-K5 white', 59.99, 'clavier/1 (4)/1 (1).webp')">Ajouter au panier</button>
+  </div>
+
+  <!-- Clavier 5 -->
+  <div class="pc-card" onclick="window.location.href='produit.html?id=g-lab-combo-argon'">
+    <img src="clavier/1 (5)/1 (1).webp" alt="THE G-LAB COMBO ARGON">
+    <h3>THE G-LAB - COMBO ARGON</h3>
+    <ul>
+      <li>🎮 Kit complet (clavier + souris)</li>
+      <li>🔴 Switchs mécaniques</li>
+      <li>💡 RGB 7 couleurs</li>
+      <li>⚡ 1000Hz polling rate</li>
+    </ul>
+    <p class="price">79,99 €</p>
+    <button onclick="event.stopPropagation(); ajouterAuPanier('THE G-LAB - COMBO ARGON', 79.99, 'clavier/1 (5)/1 (1).webp')">Ajouter au panier</button>
+  </div>
+
+  <!-- Clavier 6 -->
+  <div class="pc-card" onclick="window.location.href='produit.html?id=g-lab-keyz-elite-300'">
+    <img src="clavier/1 (6)/1 (1).webp" alt="THE G-LAB KEYZ Elite 300 WG">
+    <h3>THE G-LAB - KEYZ Elite 300 WG</h3>
+    <ul>
+      <li>🎮 Switchs mécaniques</li>
+      <li>⚡ Anti-ghosting 19 touches</li>
+      <li>💡 RGB personnalisable</li>
+      <li>🔌 USB polling 1000Hz</li>
+    </ul>
+    <p class="price">69,99 €</p>
+    <button onclick="event.stopPropagation(); ajouterAuPanier('THE G-LAB - KEYZ Elite 300 WG', 69.99, 'clavier/1 (6)/1 (1).webp')">Ajouter au panier</button>
+  </div>
+
+  <!-- Clavier 7 -->
+  <div class="pc-card" onclick="window.location.href='produit.html?id=g-lab-keyz-elite-400'">
+    <img src="clavier/1 (7)/1 (1).webp" alt="THE G-LAB KEYZ Elite 400 WB">
+    <h3>THE G-LAB - KEYZ Elite 400 WB</h3>
+    <ul>
+      <li>🎮 Switchs mécaniques premium</li>
+      <li>⚡ Anti-ghosting 19 touches</li>
+      <li>💡 RGB 16.8M couleurs</li>
+      <li>🎚️ Molette de volume</li>
+    </ul>
+    <p class="price">89,99 €</p>
+    <button onclick="event.stopPropagation(); ajouterAuPanier('THE G-LAB - KEYZ Elite 400 WB', 89.99, 'clavier/1 (7)/1 (1).webp')">Ajouter au panier</button>
+  </div>
+
+  <!-- Clavier 8 -->
+  <div class="pc-card" onclick="window.location.href='produit.html?id=g-lab-keyz-hydrogen-noir'">
+    <img src="clavier/1 (8)/1 (1).webp" alt="THE G-LAB KEYZ HYDROGEN Noir">
+    <h3>THE G-LAB - KEYZ HYDROGEN (Noir)</h3>
+    <ul>
+      <li>🔴 Design épuré noir</li>
+      <li>💡 Éclairage RGB</li>
+      <li>⚡ Switchs linéaires</li>
+      <li>🔌 Filaire USB-C</li>
+    </ul>
+    <p class="price">49,99 €</p>
+    <button onclick="event.stopPropagation(); ajouterAuPanier('THE G-LAB - KEYZ HYDROGEN (Noir)', 49.99, 'clavier/1 (8)/1 (1).webp')">Ajouter au panier</button>
+  </div>
+
+  <!-- Clavier 9 -->
+  <div class="pc-card" onclick="window.location.href='produit.html?id=g-lab-keyz-titan'">
+    <img src="clavier/1 (9)/1 (1).webp" alt="THE G-LAB KEYZ TITAN">
+    <h3>THE G-LAB - KEYZ TITAN</h3>
+    <ul>
+      <li>🏗️ Construction robuste</li>
+      <li>🎮 Switchs mécaniques</li>
+      <li>💡 RGB dynamique</li>
+      <li>⚡ 1000Hz ultra-rapide</li>
+    </ul>
+    <p class="price">99,99 €</p>
+    <button onclick="event.stopPropagation(); ajouterAuPanier('THE G-LAB - KEYZ TITAN', 99.99, 'clavier/1 (9)/1 (1).webp')">Ajouter au panier</button>
+  </div>
+
+  <!-- Clavier 10 -->
+  <div class="pc-card" onclick="window.location.href='produit.html?id=g-lab-keyz-hydro-wgfr'">
+    <img src="clavier/1 (10)/1 (1).webp" alt="THE G-LAB KEYZ-HYDRO-WGFR">
+    <h3>THE G-LAB - KEYZ-HYDRO-WGFR</h3>
+    <ul>
+      <li>⚪ Design blanc élégant</li>
+      <li>💡 Éclairage RGB</li>
+      <li>⚡ Switchs linéaires</li>
+      <li>🔌 Filaire USB-C</li>
+    </ul>
+    <p class="price">54,99 €</p>
+    <button onclick="event.stopPropagation(); ajouterAuPanier('THE G-LAB - KEYZ-HYDRO-WGFR', 54.99, 'clavier/1 (10)/1 (1).webp')">Ajouter au panier</button>
+  </div>
+</div>
+
+<!-- Panier global -->
+<div class="panier">
+  <h2>🛒 Votre Panier</h2><a href="produit.html"><button>click here</button></a>
+  <ul id="liste-panier">
+    <li style="text-align: center;">Chargement...</li>
+  </ul>
+  <div class="total">
+    Total : <span id="total-panier">0.00</span> €
+  </div>
+  <button class="vider-panier" onclick="viderPanier()">Vider le panier</button>
+</div>
+
+<script src="panier-commun.js"></script>
+<script>
+  // Rafraîchir l'affichage du panier au chargement
+  window.addEventListener('DOMContentLoaded', () => {
+    if (typeof afficherPanier === 'function') afficherPanier();
+  });
+  // Empêcher la propagation du clic sur les boutons pour ne pas déclencher le lien parent
+  document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', (e) => e.stopPropagation());
+  });
+</script>
+</body>
+</html>
