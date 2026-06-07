@@ -6,6 +6,154 @@
   <link rel="icon" type="image/x-icon" href="images\logo.png">
   <title>Catalogue Claviers</title>
   <style>
+     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@300&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        body {
+            background: #f5f5f5;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2px 10%;
+            background-color: #ffffff;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        .menu-icon {
+            width: 35px;
+            cursor: pointer;
+            margin-right: 30px;
+        }
+        .logo {
+            width: 90px;
+            height: 60px;
+            padding: 0;
+        }
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+        .menu ul {
+            display: flex;
+            list-style: none;
+            margin-left: 20px;
+        }
+        h1 a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .menu ul a {
+            text-decoration: none;
+            text-transform: uppercase;
+            color: black;
+            margin: 0 10px;
+            font-size: 13px;
+            position: relative;
+            font-weight: 600;
+        }
+        button:not(.panier) {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.2s ease-out;
+            z-index: 1;
+            text-decoration: none;
+        }
+        button span {
+            font-family: 'Anton', sans-serif;
+            font-size: 15px;
+            text-align: center;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        .login {
+            position: absolute;
+            top: 50px;
+            right: -110px;
+            padding: 20px;
+            width: 270px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        .login button {
+            width: 100%;
+            margin-top: 10px;
+            background-color: gray;
+        }
+        h2 i {
+            z-index: 110;
+            color: #000000;
+            font-family: 'Anton', sans-serif;
+        }
+        .fa-user hr {
+            width: 100%;
+            border: 0;
+            background-color: grey;
+            height: 1px;
+            margin: 20px 0;
+        }
+        .login p {
+            font-size: 14px;
+            color: rgb(0, 0, 0);
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+        .login button:last-child:not(.connexion) {
+            color: blue;
+            background-color: transparent;
+            border: 1px solid blue;
+        }
+        .header-end {
+            display: flex;
+            align-items: center;
+        }
+        .header-end i {
+            margin-right: 20px;
+            font-size: 22px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .header-end i:hover {
+            color: #0057ff;
+            transform: scale(1.1);
+        }
+        .login::after {
+            content: "";
+            position: absolute;
+            top: -3px;
+            right: 119px;
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            transform: rotate(50deg);
+        }
+        .fa-user {
+            position: relative;
+            padding: 10px;
+        }
+        .fa-user:hover .login {
+            display: block;
+        }
     * {
       margin: 0;
       padding: 0;
@@ -26,6 +174,12 @@
       text-shadow: 2px 2px 4px black;
       margin-bottom: 30px;
       font-size: 2.5rem;
+      margin-top: 80px;
+    }
+    h2{
+      font-size: 30px;
+      font-weight: bold;
+      color: #000000;
     }
     .catalogue {
       display: grid;
@@ -142,6 +296,35 @@
     }
   </style>
 </head>
+<header>
+    <nav class="menu">
+        <img src="C:\Users\YOUVA\Documents\projet dev-web\images\menu.png" class="menu-icon" alt="menu">
+        <h2><a href="index.html">B Y S</a></h2>
+        <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">Produits</a></li>
+            <li><a href="#">À propos</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#" id="cartLink">Panier</a></li>
+        </ul>
+    </nav>
+    <img src="images\logo.png" class="logo" alt="logo">
+    <div class="header-end">
+        <i class="fa-solid fa-location-dot"></i>
+        <i class="fa-solid fa-user">
+            <div class="login">  
+                <a href="deep.html#login"><button class="connexion"><span>Se connecter</span></button></a>
+                <hr>
+                <p>Pas de compte ?</p>
+                <a href="deep.html#register"><button class="inscription"><span>S'inscrire</span></button></a>
+            </div>
+        </i> 
+        <i class="fa-solid fa-cart-shopping" id="cartIcon">
+            <span class="cart-count" id="cartCount">0</span>
+        </i>  
+    </div>
+</header>
+
 <body>
 
 <h1>🎮 Catalogue des Claviers Gamer 🎮</h1>
