@@ -104,56 +104,111 @@
 <script src="produit.js"></script>
 <script src="product.js"></script>
 <script src="panier-commun.js"></script>  <script>
-    let panier = [];
-
-    function ajouterAuPanier(nom, prix) {
-      panier.push({ nom: nom, prix: parseFloat(prix) });
-      afficherPanier();
-    }
-
-    function ajouterProduitAuPanier() {
-      const nom = document.getElementById('titre-produit').textContent;
-      const prixText = document.getElementById('prix-produit').textContent;
-      const prix = parseFloat(prixText.replace('€', '').trim());
-      ajouterAuPanier(nom, prix);
-    }
-
-    function afficherPanier() {
-      const listePanier = document.getElementById('liste-panier');
-      const totalSpan = document.getElementById('total-panier');
+    
+                 // PRODUITS SIMILAIRES
+      const similairesDiv = document.getElementById("liste-similaires");
       
-      listePanier.innerHTML = '';
-      let total = 0;
+      // Appliquer le style grid pour 3 par ligne
+      similairesDiv.style.display = "grid";
+      similairesDiv.style.gridTemplateColumns = "repeat(3, 1fr)";
+      similairesDiv.style.gap = "20px";
+      similairesDiv.style.maxWidth = "1400px";
+      similairesDiv.style.margin = "0 auto";
       
-      if (panier.length === 0) {
-        listePanier.innerHTML = '<li style="text-align: center; color: #999;">Votre panier est vide</li>';
-      } else {
-        panier.forEach((item, index) => {
-          const li = document.createElement('li');
-          li.innerHTML = `
-            <span>${item.nom}</span>
-            <span>${item.prix.toFixed(2)} €</span>
-            <button onclick="retirerDuPanier(${index})" style="background-color:#f44336; padding:5px 10px;">Retirer</button>
+      if (produit.similaires && produit.similaires.length > 0) {
+        produit.similaires.forEach(idSimilaire => {
+          const p = produits[idSimilaire];
+          if (!p) return;
+
+          // Création d'une carte avec le même style que clavier.html
+          const card = document.createElement("div");
+          card.className = "pc-card";
+          
+          // Style inline pour correspondre exactement à clavier.html
+          card.style.background = "rgba(255, 255, 255, 0.95)";
+          card.style.border = "2px solid black";
+          card.style.borderRadius = "20px";
+          card.style.padding = "15px";
+          card.style.transition = "transform 0.3s, box-shadow 0.3s";
+          card.style.cursor = "pointer";
+          card.style.display = "flex";
+          card.style.flexDirection = "column";
+          
+          // Ajout de l'effet hover
+          card.onmouseenter = () => {
+            card.style.transform = "translateY(-5px)";
+            card.style.boxShadow = "0 10px 25px rgba(0,0,0,0.2)";
+          };
+          card.onmouseleave = () => {
+            card.style.transform = "translateY(0)";
+            card.style.boxShadow = "none";
+          };
+
+          card.innerHTML = `
+            <img src="${p.images[0]}" alt="${p.nom}" style="width: 100%; height: 200px; object-fit: contain; background: #f0f0f0; border-radius: 10px; margin-bottom: 10px;">
+            <h3 style="font-size: 1rem; margin: 10px 0; text-align: center; color: #333;">${p.nom}</h3>
+            <ul style="list-style: none; padding: 0; margin: 0 0 10px 0;">
+              ${p.caracteristiques.split(" | ").slice(0, 2).map(spec => `<li style="font-size: 0.8rem; margin: 5px 0; color: #555;">⚡ ${spec}</li>`).join('')}
+            </ul>
+            <p class="price" style="font-weight: bold; color: #d32f2f; font-size: 1.2rem; text-align: center; margin: 10px 0;">${p.prix} €</p>
+            <button style="background: gray; border: 1px solid black; border-radius: 20px; padding: 8px 16px; font-weight: bold; color: blue; cursor: pointer; margin-top: 10px; transition: 0.2s; width: fit-content; align-self: center;">Ajouter au panier</button>
           `;
-          listePanier.appendChild(li);
-          total += item.prix;
+
+          // Ajout de l'événement click pour rediriger vers le produit
+          card.addEventListener('click', (e) => {
+            if (!e.target.closest('button')) {
+              window.location.href = "produit.html?id=" + p.id;
+            }
+          });
+          
+          // Ajout de l'événement pour le bouton "Ajouter au panier"
+          const btn = card.querySelector('button');
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (typeof ajouterAuPanier === 'function') {
+              ajouterAuPanier(p.nom, p.prix, p.images[0]);
+            } else if (typeof window.ajouterAuPanier === 'function') {
+              window.ajouterAuPanier(p.nom, p.prix, p.images[0]);
+            }
+          });
+
+          similairesDiv.appendChild(card);
         });
       }
-      
-      totalSpan.textContent = total.toFixed(2);
-    }
 
-    function retirerDuPanier(index) {
-      panier.splice(index, 1);
-      afficherPanier();
-    }
+document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
 
-    function viderPanier() {
-      panier = [];
-      afficherPanier();
-    }
+    btn.addEventListener('click', () => {
 
+        const produit = btn.closest('.pc');
 
-  </script>
+        ajouterAuPanier(
+            produit.dataset.name,
+            parseFloat(produit.dataset.price),
+            produit.dataset.img
+        );
+
+    });
+
+});
+</script>
+<script>
+function ajouterProduitAuPanier() {
+
+    const nom = document.getElementById('titre-produit').textContent;
+
+    const prixText =
+        document.getElementById('prix-produit').textContent;
+
+    const prix = parseFloat(
+        prixText.replace('€', '').replace(',', '.')
+    );
+
+    const image =
+        document.querySelector('#images-produit img')?.src || '';
+
+    ajouterAuPanier(nom, prix, image);
+}
+</script>
 </body>
 </html>
